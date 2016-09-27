@@ -1,8 +1,10 @@
 package com.mutirappDAO.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Acao {
 	private int id;
 	private Usuario usuario;
@@ -27,6 +30,13 @@ public class Acao {
 	private TipoStatus status;
 	private String observacoes;
 	private Set<Interesse> interesses;
+	
+	public Acao(){}
+	
+	public Acao(String titulo){
+		this.titulo = titulo;
+		interesses = new HashSet<>();
+	}
 
 	@OneToMany(mappedBy = "acao")
 	public Set<Interesse> getInteresses() {

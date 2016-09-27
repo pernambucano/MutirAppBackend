@@ -1,5 +1,6 @@
 package com.mutirappDAO.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,10 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Interesse {
+public class Interesse implements Serializable{
 	private Usuario usuario;
 	private Acao acao;
 	private Date data;
+	
+	public Interesse(){}
 
 	@Id
 	@ManyToOne

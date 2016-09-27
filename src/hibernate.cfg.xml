@@ -28,8 +28,9 @@
 		<property name="use_sql_comments">true</property>
 		
 		<!-- Mapeamento classes -->
-<!--         <mapping class="br.com.grupo4.projetoAcademico.model.Endereco" />
- -->	
+         <mapping class="com.mutirappDAO.model.Acao" />
+         <mapping class="com.mutirappDAO.model.Interesse" />
+         <mapping class="com.mutirappDAO.model.Usuario" />
  
  </session-factory>
 </hibernate-configuration>

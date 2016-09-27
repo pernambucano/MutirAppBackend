@@ -1,5 +1,6 @@
 package com.mutirappDAO.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,6 @@ public class Usuario {
 	private boolean status;
 	private Set<Acao> acoes;
 	private Set<Interesse> interesses;
-
 	
 	
 	public Usuario(){}
@@ -48,24 +48,28 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.status = status;
+		interesses = new HashSet<>();
 	}
 
 	public Usuario(String name, String email, String senha) {
 		this.name = name;
 		this.email = email;
 		this.senha = senha;
+		interesses = new HashSet<>();
 	}
 
 	public Usuario(String name, String email) {
 		this.name = name;
 		this.email = email;
+		interesses = new HashSet<>();
 	}
 
 	public Usuario(String name) {
 		this.name = name;
+		interesses = new HashSet<>();
 	}
 
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", cascade= CascadeType.ALL)
 	public Set<Interesse> getInteresses() {
 		return interesses;
 	}
