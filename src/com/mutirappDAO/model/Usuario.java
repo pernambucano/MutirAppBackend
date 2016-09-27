@@ -106,7 +106,7 @@ public class Usuario implements Serializable{
 		this.name = name;
 	}
 
-	@Column(name = "email",nullable = false)
+	@Column(name = "email",nullable = false, unique = true)
 	public String getEmail() {
 		return email;
 	}

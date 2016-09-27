@@ -47,6 +47,35 @@ public class Application implements CommandLineRunner{
 		usuarioA.setSenha("12345");
 		usuarioA.setStatus(true);
 		
+//		Usuario usuarioS = new Usuario("Bruna magalhaes buffao baudel");
+//		usuarioS.setEmail("contatobruna@contato.com");
+//		usuarioS.setSenha("12345");
+//		usuarioS.setStatus(true);
+//		
+//		
+//		usuarioRepository.save(usuarioS);
+		
+		Usuario usuarioY = new Usuario("Wolowits");
+		usuarioY.setEmail("contatowolowits@contato.com");
+		usuarioY.setSenha("12345");
+		usuarioY.setStatus(true);
+		
+		usuarioRepository.save(usuarioY); 
+		
+		Usuario usuarioX = new Usuario("Leonard");
+		usuarioX.setEmail("contatoleonard@contato.com");
+		usuarioX.setSenha("12345");
+		usuarioX.setStatus(true);
+		
+		
+		usuarioRepository.save(usuarioX); 
+		
+		Usuario usuarioZ = new Usuario("Sheldon");
+		usuarioZ.setEmail("contatosheldon@contato.com");
+		usuarioZ.setSenha("12345");
+		usuarioZ.setStatus(true);
+		
+		usuarioRepository.save(usuarioZ); 
 		
 		Usuario usuarioB = new Usuario("Fagner");
 		usuarioB.setEmail("contatofagner@contato.com");
@@ -102,8 +131,25 @@ public class Application implements CommandLineRunner{
 		intB.setData(new Date());
 		
 		
+		Interesse intC = new Interesse();
+		intC.setUsuario(usuarioX);
+		intC.setAcao(acaoB);
+		intC.setData(new Date());
+		
+		Interesse intD = new Interesse();
+		intD.setUsuario(usuarioX);
+		intD.setAcao(acaoA);
+		intD.setData(new Date());
+		
+		
+		
 		usuarioA.getInteresses().add(intA);
 		usuarioB.getInteresses().add(intB); 
+		
+//		usuarioX.getInteresses().add(intC); // repetido
+		usuarioX.getInteresses().add(intD); // repetido
+		
+		usuarioX.getInteresses().add(intC);
 		
 		acaoRepository.save(acaoB);
 		acaoRepository.save(acaoA);
