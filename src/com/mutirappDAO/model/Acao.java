@@ -28,6 +28,8 @@ public class Acao implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	private TipoCategoria Categoria;//not null
+	
+	
 	private String titulo;//not null
 	private String descricao;//not null
 	private Date dataCadastro;//not null
@@ -200,7 +202,7 @@ public class Acao implements Serializable{
 	}
 
 	
-//	// Não está completo! 
+//	// Nï¿½o estï¿½ completo! 
 //	@Override
 //	public boolean equals(Object arg0) {
 //		if (this == arg0)
@@ -285,7 +287,7 @@ public class Acao implements Serializable{
 //		
 //	}
 //
-//	// Não está completo! 
+//	// Nï¿½o estï¿½ completo! 
 //	@Override
 //	public int hashCode() {
 //		final int prime = 31;
@@ -299,7 +301,7 @@ public class Acao implements Serializable{
 //		result = prime * result + ((this.endUf == null) ? 0 : this.endUf.hashCode());
 //		result = prime * result + ((this.observacoes == null) ? 0 : this.observacoes.hashCode());
 //		result = prime * result + ((this.titulo == null) ? 0 : this.titulo.hashCode());
-//		result = prime * result + this.getId(); // Id é um inteiro
+//		result = prime * result + this.getId(); // Id ï¿½ um inteiro
 //
 //
 //		return result;

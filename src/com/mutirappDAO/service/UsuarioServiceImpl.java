@@ -1,13 +1,17 @@
 package com.mutirappDAO.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mutirappDAO.model.Acao;
+import com.mutirappDAO.model.Interesse;
 import com.mutirappDAO.model.Usuario;
 import com.mutirappDAO.repository.UsuarioRepository;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -20,19 +24,47 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario getUsuarioByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioRepository.findByEmail(email);
 	}
 
 	@Override
 	public void cadastrarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
+		usuarioRepository.save(usuario);
 	}
 
 	@Override
 	public void alterarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
+		// alterar usuario
 	}
+
+	@Override
+	public void deleteUsuarioByEmail(String email) {
+		usuarioRepository.delete(usuarioRepository.findByEmail(email));
+	}
+	
+	public List<Acao> getAcoesCadastradasPorEmail(String email){
+		int user_id = usuarioRepository.findByEmail(email).getId();
+		List<Object> lista =usuarioRepository.getAcoesCriadasById(user_id);
+//		System.out.println(lista);
+		List<Acao> listaDeAcoes = new ArrayList<Acao>();
+		for (Object o: lista){
+			listaDeAcoes.add(((Acao)o));
+		}
+		
+		return listaDeAcoes;
+	}
+
+	@Override
+	public List<Acao> getAcoesInteressadasPorEmail(String email) {
+		int user_id = usuarioRepository.findByEmail(email).getId();
+		List<Object> lista =usuarioRepository.getAcoesInteressadasById(user_id);
+		List<Acao> listaDeAcoes = new ArrayList<Acao>();
+		for (Object o: lista){
+			listaDeAcoes.add(((Interesse)o).getAcao());
+		}
+		
+		return listaDeAcoes;
+	}
+	
+	
 }

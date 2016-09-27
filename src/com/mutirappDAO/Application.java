@@ -1,6 +1,7 @@
 package com.mutirappDAO;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -18,22 +19,24 @@ import com.mutirappDAO.model.TipoStatus;
 import com.mutirappDAO.model.Usuario;
 import com.mutirappDAO.repository.AcaoRepository;
 import com.mutirappDAO.repository.UsuarioRepository;
+import com.mutirappDAO.service.UsuarioService;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner{
+public class Application implements CommandLineRunner {
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
-	
+
+	@Autowired
+	private UsuarioService usuarioS;
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private AcaoRepository acaoRepository;
-	
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Application.class, args);
 	}
-
 
 	@Override
 	@Transactional
@@ -46,43 +49,41 @@ public class Application implements CommandLineRunner{
 		usuarioA.setEmail("contatobruna@contato.com");
 		usuarioA.setSenha("12345");
 		usuarioA.setStatus(true);
-		
-//		Usuario usuarioS = new Usuario("Bruna magalhaes buffao baudel");
-//		usuarioS.setEmail("contatobruna@contato.com");
-//		usuarioS.setSenha("12345");
-//		usuarioS.setStatus(true);
-//		
-//		
-//		usuarioRepository.save(usuarioS);
-		
+
+		// Usuario usuarioS = new Usuario("Bruna magalhaes buffao baudel");
+		// usuarioS.setEmail("contatobruna@contato.com");
+		// usuarioS.setSenha("12345");
+		// usuarioS.setStatus(true);
+		//
+		//
+		// usuarioRepository.save(usuarioS);
+
 		Usuario usuarioY = new Usuario("Wolowits");
 		usuarioY.setEmail("contatowolowits@contato.com");
 		usuarioY.setSenha("12345");
 		usuarioY.setStatus(true);
-		
-		usuarioRepository.save(usuarioY); 
-		
+
+		usuarioRepository.save(usuarioY);
+
 		Usuario usuarioX = new Usuario("Leonard");
 		usuarioX.setEmail("contatoleonard@contato.com");
 		usuarioX.setSenha("12345");
 		usuarioX.setStatus(true);
-		
-		
-		usuarioRepository.save(usuarioX); 
-		
+
+		usuarioRepository.save(usuarioX);
+
 		Usuario usuarioZ = new Usuario("Sheldon");
 		usuarioZ.setEmail("contatosheldon@contato.com");
 		usuarioZ.setSenha("12345");
 		usuarioZ.setStatus(true);
-		
-		usuarioRepository.save(usuarioZ); 
-		
+
+		usuarioRepository.save(usuarioZ);
+
 		Usuario usuarioB = new Usuario("Fagner");
 		usuarioB.setEmail("contatofagner@contato.com");
 		usuarioB.setSenha("123456");
 		usuarioB.setStatus(true);
-		
-		
+
 		/*
 		 * acoes
 		 * 
@@ -93,17 +94,16 @@ public class Application implements CommandLineRunner{
 		acaoA.setEndCidade("Recife");
 		acaoA.setEndRua("Rua da Oportunidade de fazer algo");
 		acaoA.setEndUf("PE");
-		acaoA.setEndReferencia("Fica por próximo ao lugar por ai");
+		acaoA.setEndReferencia("Fica por prï¿½ximo ao lugar por ai");
 		acaoA.setEndCep("50000000");
 		acaoA.setDataOcorrencia(new Date());
 		acaoA.setDataCadastro(new Date());
 		acaoA.setCategoria(TipoCategoria.MEIO_AMBIENTE);
 		acaoA.setStatus(TipoStatus.EM_ABERTO);
 		acaoA.setUsuario(usuarioA);
-		
-		
-		Acao acaoB = new Acao("Vazamento de àgua");
-		acaoB.setDescricao("Necessario a para realizarmos a ação.");
+
+		Acao acaoB = new Acao("Vazamento de ï¿½gua");
+		acaoB.setDescricao("Necessario a para realizarmos a aï¿½ï¿½o.");
 		acaoB.setEndBairro("Boa vista");
 		acaoB.setEndCidade("Recife");
 		acaoB.setEndRua("Rua da qualquer");
@@ -114,7 +114,7 @@ public class Application implements CommandLineRunner{
 		acaoB.setDataCadastro(new Date());
 		acaoB.setCategoria(TipoCategoria.ANIMAIS);
 		acaoB.setStatus(TipoStatus.EM_ABERTO);
-		acaoB.setUsuario(usuarioB);  	// Banco salva?
+		acaoB.setUsuario(usuarioB); // Banco salva?
 		/*
 		 * Interesseres
 		 * 
@@ -123,43 +123,51 @@ public class Application implements CommandLineRunner{
 		intA.setUsuario(usuarioA);
 		intA.setAcao(acaoB);
 		intA.setData(new Date());
-		
-		
+
 		Interesse intB = new Interesse();
 		intB.setUsuario(usuarioB);
 		intB.setAcao(acaoA);
 		intB.setData(new Date());
-		
-		
+
 		Interesse intC = new Interesse();
 		intC.setUsuario(usuarioX);
 		intC.setAcao(acaoB);
 		intC.setData(new Date());
-		
+
 		Interesse intD = new Interesse();
 		intD.setUsuario(usuarioX);
 		intD.setAcao(acaoA);
 		intD.setData(new Date());
-		
-		
-		
+
 		usuarioA.getInteresses().add(intA);
-		usuarioB.getInteresses().add(intB); 
-		
-//		usuarioX.getInteresses().add(intC); // repetido
+		usuarioB.getInteresses().add(intB);
+
+		// usuarioX.getInteresses().add(intC); // repetido
 		usuarioX.getInteresses().add(intD); // repetido
-		
+
 		usuarioX.getInteresses().add(intC);
-		
+
 		acaoRepository.save(acaoB);
 		acaoRepository.save(acaoA);
 
-		
-		usuarioRepository.save(usuarioA); 
+		usuarioRepository.save(usuarioA);
 		usuarioRepository.save(usuarioB);
+
 		
-		
+		// imprimir as acoes criadas usando a query
+		System.out.println("Acoes Criadas de " + usuarioA.getName());
+		List<Acao> listaCriadas = usuarioS.getAcoesCadastradasPorEmail(usuarioA.getEmail());
+		for (Acao a : listaCriadas) {
+			System.out.println(a.getTitulo());
+		}
+
+		// imprimir as acoes criadas usando a query
+		System.out.println("Acoes Interessadas de " + usuarioA.getName());
+		List<Acao> listaInteressadas = usuarioS.getAcoesInteressadasPorEmail(usuarioA.getEmail());
+		for (Acao a : listaInteressadas) {
+			System.out.println(a.getTitulo());
+		}
+
 	}
 
-	
 }
