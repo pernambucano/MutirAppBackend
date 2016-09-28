@@ -13,12 +13,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.mutirappDAO.model.Acao;
-import com.mutirappDAO.model.Interesse;
 import com.mutirappDAO.model.TipoCategoria;
 import com.mutirappDAO.model.TipoStatus;
 import com.mutirappDAO.model.Usuario;
-import com.mutirappDAO.repository.AcaoRepository;
-import com.mutirappDAO.repository.UsuarioRepository;
+import com.mutirappDAO.service.AcaoService;
 import com.mutirappDAO.service.UsuarioService;
 
 @SpringBootApplication
@@ -29,7 +27,7 @@ public class Application implements CommandLineRunner {
 	private UsuarioService usuarioS;
 
 	@Autowired
-	private AcaoRepository acaoRepository;
+	private AcaoService acaoS;
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Application.class, args);
@@ -126,8 +124,28 @@ public class Application implements CommandLineRunner {
 		acaoB.setUsuario(usuarioB); // Banco salva?
 
 		
-		acaoRepository.save(acaoB);
-		acaoRepository.save(acaoA);
+//		acaoRepository.save(acaoB);
+//		acaoRepository.save(acaoA);
+		
+		
+		acaoS.cadastrarAcao(acaoA);
+		acaoS.cadastrarAcao(acaoB);
+		
+		
+		System.out.println("Descricao de Limpar Jardim"+ acaoS.getAcaoByTitulo("Limpar Jardim").getDescricao());
+		System.out.println("Imprimindo as ultimas acoes");
+		List<Acao> lista1 = acaoS.getUltimasAcoes();
+		for(Acao a : lista1){
+			System.out.println(a.getTitulo());
+		}
+
+		
+		System.out.println("Imprimindo as todas acoes");
+		List<Acao> lista2 = acaoS.listarTodasAcoes();
+		for(Acao a : lista2){
+			System.out.println(a.getTitulo());
+		}
+		
 		
 		/*
 		 * Interesseres
