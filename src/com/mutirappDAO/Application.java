@@ -29,9 +29,6 @@ public class Application implements CommandLineRunner {
 	private UsuarioService usuarioS;
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
-
-	@Autowired
 	private AcaoRepository acaoRepository;
 
 	public static void main(String[] args) throws Exception {
@@ -63,26 +60,38 @@ public class Application implements CommandLineRunner {
 		usuarioY.setSenha("12345");
 		usuarioY.setStatus(true);
 
-		usuarioRepository.save(usuarioY);
+//		usuarioRepository.save(usuarioY);
+		usuarioS.cadastrarUsuario(usuarioY);
 
 		Usuario usuarioX = new Usuario("Leonard");
 		usuarioX.setEmail("contatoleonard@contato.com");
 		usuarioX.setSenha("12345");
 		usuarioX.setStatus(true);
 
-		usuarioRepository.save(usuarioX);
+//		usuarioRepository.save(usuarioX);
+		usuarioS.cadastrarUsuario(usuarioX);
+
 
 		Usuario usuarioZ = new Usuario("Sheldon");
 		usuarioZ.setEmail("contatosheldon@contato.com");
 		usuarioZ.setSenha("12345");
 		usuarioZ.setStatus(true);
 
-		usuarioRepository.save(usuarioZ);
+//		usuarioRepository.save(usuarioZ);
+		usuarioS.cadastrarUsuario(usuarioZ);
+
 
 		Usuario usuarioB = new Usuario("Fagner");
 		usuarioB.setEmail("contatofagner@contato.com");
 		usuarioB.setSenha("123456");
 		usuarioB.setStatus(true);
+
+//		usuarioRepository.save(usuarioA);
+//		usuarioRepository.save(usuarioB);
+		
+		usuarioS.cadastrarUsuario(usuarioA);
+		usuarioS.cadastrarUsuario(usuarioB);
+
 
 		/*
 		 * acoes
@@ -115,43 +124,48 @@ public class Application implements CommandLineRunner {
 		acaoB.setCategoria(TipoCategoria.ANIMAIS);
 		acaoB.setStatus(TipoStatus.EM_ABERTO);
 		acaoB.setUsuario(usuarioB); // Banco salva?
+
+		
+		acaoRepository.save(acaoB);
+		acaoRepository.save(acaoA);
+		
 		/*
 		 * Interesseres
 		 * 
 		 */
-		Interesse intA = new Interesse();
-		intA.setUsuario(usuarioA);
-		intA.setAcao(acaoB);
-		intA.setData(new Date());
+		
+//		Interesse intA = new Interesse();
+//		intA.setUsuario(usuarioA);
+//		intA.setAcao(acaoB);
+//		intA.setData(new Date());
+//
+//		Interesse intB = new Interesse();
+//		intB.setUsuario(usuarioB);
+//		intB.setAcao(acaoA);
+//		intB.setData(new Date());
+//
+//		Interesse intC = new Interesse();
+//		intC.setUsuario(usuarioX);
+//		intC.setAcao(acaoB);
+//		intC.setData(new Date());
+//
+//		Interesse intD = new Interesse();
+//		intD.setUsuario(usuarioX);
+//		intD.setAcao(acaoA);
+//		intD.setData(new Date());
 
-		Interesse intB = new Interesse();
-		intB.setUsuario(usuarioB);
-		intB.setAcao(acaoA);
-		intB.setData(new Date());
-
-		Interesse intC = new Interesse();
-		intC.setUsuario(usuarioX);
-		intC.setAcao(acaoB);
-		intC.setData(new Date());
-
-		Interesse intD = new Interesse();
-		intD.setUsuario(usuarioX);
-		intD.setAcao(acaoA);
-		intD.setData(new Date());
-
-		usuarioA.getInteresses().add(intA);
-		usuarioB.getInteresses().add(intB);
+//		usuarioA.getInteresses().add(intA);
+//		usuarioB.getInteresses().add(intB);
 
 		// usuarioX.getInteresses().add(intC); // repetido
-		usuarioX.getInteresses().add(intD); // repetido
+//		usuarioX.getInteresses().add(intD); // repetido
 
-		usuarioX.getInteresses().add(intC);
+//		usuarioX.getInteresses().add(intC);
 
-		acaoRepository.save(acaoB);
-		acaoRepository.save(acaoA);
+		usuarioS.inserirInteresse(usuarioA, acaoB, new Date());
+		usuarioS.inserirInteresse(usuarioB, acaoA, new Date());
+		usuarioS.inserirInteresse(usuarioX, acaoB, new Date());
 
-		usuarioRepository.save(usuarioA);
-		usuarioRepository.save(usuarioB);
 
 		
 		// imprimir as acoes criadas usando a query

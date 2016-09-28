@@ -1,5 +1,6 @@
 package com.mutirappDAO.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.mutirappDAO.model.Acao;
@@ -13,5 +14,6 @@ public interface UsuarioService {
 	public void deleteUsuarioByEmail(String email);
 	public List<Acao> getAcoesCadastradasPorEmail(String email);
 	public List<Acao> getAcoesInteressadasPorEmail(String email);
+	public void inserirInteresse(Usuario usuario, Acao a, Date data);
 	
 }

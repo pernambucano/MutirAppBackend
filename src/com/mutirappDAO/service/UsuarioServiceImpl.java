@@ -1,6 +1,7 @@
 package com.mutirappDAO.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Acao> getAcoesCadastradasPorEmail(String email){
 		int user_id = usuarioRepository.findByEmail(email).getId();
 		List<Object> lista =usuarioRepository.getAcoesCriadasById(user_id);
-//		System.out.println(lista);
 		List<Acao> listaDeAcoes = new ArrayList<Acao>();
 		for (Object o: lista){
 			listaDeAcoes.add(((Acao)o));
@@ -65,6 +65,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return listaDeAcoes;
 	}
+
+	@Override
+	public void inserirInteresse(Usuario usuario, Acao acao, Date data) {
+		Interesse interesse = new Interesse();
+		interesse.setUsuario(usuario);
+		interesse.setAcao(acao);
+		interesse.setData(data);
+		
+		usuario.getInteresses().add(interesse);
+	}
+	
+	
 	
 	
 }

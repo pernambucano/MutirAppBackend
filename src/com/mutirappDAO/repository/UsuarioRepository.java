@@ -18,4 +18,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 	
 	@Query("from Interesse where usuario_id = :usuarioId")
 	List<Object> getAcoesInteressadasById(@Param("usuarioId") int usuarioId);
+	
+	
 }
